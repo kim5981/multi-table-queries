@@ -31,15 +31,6 @@ const validateScheme = async (req, res, next) => {
   }
 }
 
-/*
-  If `instructions` is missing, empty string or not a string, or
-  if `step_number` is not a number or is smaller than one:
-
-  status 400
-  {
-    "message": "invalid step"
-  }
-*/
 const validateStep = (req, res, next) => {
   const { step_number, instructions } = req.body
   if( 

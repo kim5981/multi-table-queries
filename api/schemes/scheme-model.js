@@ -14,10 +14,13 @@ function find() { // EXERCISE A
       GROUP BY sc.scheme_id
       ORDER BY sc.scheme_id ASC;
 
-    2A- When you have a grasp on the query go ahead and build it in Knex.
-    Return from this function the resulting dataset.
   */
- 
+  return db("schemes as sc")
+  //* LEFT JOIN steps as st ON sc.scheme_id = st.scheme_id
+  .leftJoin("steps as st", "sc.scheme_id", "st.scheme_id")
+  .select("sc.*")
+  .count("st.step_id as number_of_steps")
+  .groupBy("sc.scheme_id")
 }
 
 function findById(scheme_id) { // EXERCISE B
