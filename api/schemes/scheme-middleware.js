@@ -27,8 +27,8 @@ const validateScheme = async (req, res, next) => {
     !scheme_name.trim() 
   ) {
     next({
-      status: 404, 
-      message: "invalid scheme name"
+      status: 400, 
+      message: "invalid scheme_name"
     })
   } else {
     next()
