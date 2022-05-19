@@ -39,15 +39,14 @@ const validateStep = (req, res, next) => {
   const { step_number, instructions } = req.body
   if( 
     instructions === undefined ||
-    !instructions.trim() || 
     typeof instructions !== "string"||
+    !instructions.trim() || 
     typeof step_number !== "number" ||
+    isNaN(step_number) ||
     step_number < 1
   ){
-    next({
-      status: 400,
-      message: "invalid step"
-    })
+    const err = { status: 400, message: "invalid step" }
+    next(err)
   }else{
     next()
   }
