@@ -19,14 +19,6 @@ const checkSchemeId = async (req, res, next) => {
   }
 }
 
-/*
-  If `scheme_name` is missing, empty string or not a string:
-
-  status 400
-  {
-    "message": "invalid scheme_name"
-  }
-*/
 const validateScheme = async (req, res, next) => {
     const { scheme_name } = req.body
   if(
@@ -49,7 +41,21 @@ const validateScheme = async (req, res, next) => {
   }
 */
 const validateStep = (req, res, next) => {
-
+  const { step_number, instructions } = req.body
+  if( 
+    instructions === undefined ||
+    !instructions.trim() || 
+    typeof instructions !== "string"||
+    typeof step_number !== "number" ||
+    step_number < 1
+  ){
+    next({
+      status: 400,
+      message: "invalid step"
+    })
+  }else{
+    next()
+  }
 }
 
 module.exports = {
